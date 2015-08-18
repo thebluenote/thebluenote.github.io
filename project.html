@@ -75,7 +75,7 @@ img {
 test_set&lt;-read.csv('pml-testing.csv')
 training_set&lt;-read.csv('pml-training.csv')
 library(caret)</code></pre>
-<p>We will use the dataframe training_set for model training and validation. The dataframe test_set is given the test the performance of the model.</p>
+<p>We will use the dataframe training_set for model training and validation. The dataframe test_set will be used to test the model.</p>
 <p>We perform an exploratory data analysis to get to grips with the data and the problem:</p>
 <pre class="r"><code>dim(test_set)</code></pre>
 <pre><code>## [1]  20 160</code></pre>
@@ -87,7 +87,7 @@ library(caret)</code></pre>
 </div>
 <div id="feature-selection" class="section level3">
 <h3>Feature selection</h3>
-<p>The number of features is very big, so it will be wise to try to reduce it before running the classification algorithm. We first check if both training and test have the same variables:</p>
+<p>The number of features is very big, so it will be wise to try to reduce it before running the classification algorithm. We first check if both the training and the test set have the same variables:</p>
 <pre class="r"><code>setdiff(names(test_set), names(training_set))</code></pre>
 <pre><code>## [1] &quot;problem_id&quot;</code></pre>
 <pre class="r"><code>setdiff(names(training_set), names(test_set))</code></pre>
@@ -111,7 +111,7 @@ training_set&lt;-training_set[,-seq(1,7)]</code></pre>
 <pre class="r"><code>setdiff(names(returnNA(training_set)), names(returnNA(test_set)))</code></pre>
 <pre><code>## character(0)</code></pre>
 <p>we conclude that all of the columns with NAs in the training set (67) are also in the test set.</p>
-<p>Let’s explore how many NAs are there in ecah set:</p>
+<p>Let’s explore how many NAs are there in each set:</p>
 <pre class="r"><code>table(returnNA(training_set))</code></pre>
 <pre><code>## 
 ## 19216 

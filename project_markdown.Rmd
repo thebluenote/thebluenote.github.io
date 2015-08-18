@@ -18,7 +18,7 @@ training_set<-read.csv('pml-training.csv')
 library(caret)
 ```
 
-We will use the dataframe training\_set for model training and validation. The dataframe test\_set is given the test the performance of the model.
+We will use the dataframe training\_set for model training and validation. The dataframe test\_set will be used to test the model.
 
 We perform an exploratory data analysis to get to grips with the data and the problem:
 
@@ -32,7 +32,7 @@ The training\_set is quite big (19622 observations of 160 variables), and the va
 
 ### Feature selection
 
-The number of features is very big, so it will be wise to try to reduce it before running the classification algorithm. We first check if both training and test have the same variables:
+The number of features is very big, so it will be wise to try to reduce it before running the classification algorithm. We first check if both the training and the test set have the same variables:
 
 ```{r}
 setdiff(names(test_set), names(training_set))
@@ -72,7 +72,7 @@ setdiff(names(returnNA(training_set)), names(returnNA(test_set)))
 
 we conclude that all of the columns with NAs in the training set (67) are also in the test set. 
 
-Let's explore how many NAs are there in ecah set:
+Let's explore how many NAs are there in each set:
 
 ```{r}
 table(returnNA(training_set))
@@ -119,7 +119,7 @@ validation<-training_set[-inTrain, ]
 
 We train a random forest with the training set using all the non-discarded variables as features:
 
-```{r, eval=FALSE}
+```{r}
 set.seed(666)
 modFit<-train(classe~., method='rf', data=training)
 ```
